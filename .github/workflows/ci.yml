@@ -33,5 +33,8 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Prisma schema generation
+        run: pnpm --filter @micra/database generate
+
       - name: Build
         run: pnpm build
