@@ -1,0 +1,28 @@
+import { Controller, Get, Module, Req } from '@nestjs/common';
+import type { Request } from 'node:http';
+
+@Controller('health')
+class HealthController {
+  @Get()
+  getHealth() {
+    return {
+      status: 'ok',
+      service: 'micra-api',
+      version: '0.1.0',
+      runtime: 'bootstrap',
+    } as const;
+  }
+
+  @Get('tenant-context')
+  getTenantContext(@Req() request: Request) {
+    return {
+      tenantId: request.headers['x-tenant-id'] ?? null,
+      authenticated: false,
+    } as const;
+  }
+}
+
+@Module({
+  controllers: [HealthController],
+})
+export class AppModule {}
