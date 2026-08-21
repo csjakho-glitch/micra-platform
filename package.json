@@ -1,11 +1,16 @@
 {
   "name": "micra-platform",
   "private": true,
-  "version": "0.0.0-bootstrap",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "lint": "echo 'lint: implementation pending'",
-    "typecheck": "echo 'typecheck: implementation pending'",
-    "test": "echo 'test: implementation pending'",
-    "build": "echo 'build: implementation pending'"
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @micra/api dev",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }
