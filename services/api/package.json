@@ -10,6 +10,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@micra/api-contracts": "workspace:*",
+    "@micra/domain-types": "workspace:*",
     "@nestjs/common": "^11.1.6",
     "@nestjs/core": "^11.1.6",
     "class-transformer": "^0.5.1",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
+    "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }
 }
