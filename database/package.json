@@ -7,9 +7,9 @@
     "lint": "node -e \"console.log('lint baseline: pass')\"",
     "typecheck": "node -e \"console.log('database typecheck baseline: pass')\"",
     "test": "node -e \"console.log('database test baseline: pass')\"",
-    "generate": "prisma generate"
+    "generate": "prisma generate --schema schema/schema.prisma"
   },
   "devDependencies": {
-    "prisma": "^6.20.0"
+    "prisma": "7.9.1"
   }
 }
