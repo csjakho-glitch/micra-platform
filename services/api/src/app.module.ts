@@ -1,5 +1,6 @@
 import { Controller, Get, Module, Req } from '@nestjs/common';
 import type { Request } from 'node:http';
+import { FarmModule } from './modules/farm/farm.module';
 
 @Controller('health')
 class HealthController {
@@ -9,7 +10,7 @@ class HealthController {
       status: 'ok',
       service: 'micra-api',
       version: '0.1.0',
-      runtime: 'bootstrap',
+      runtime: 'typescript-nestjs',
     } as const;
   }
 
@@ -23,6 +24,7 @@ class HealthController {
 }
 
 @Module({
+  imports: [FarmModule],
   controllers: [HealthController],
 })
 export class AppModule {}
