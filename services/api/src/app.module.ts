@@ -1,6 +1,9 @@
 import { Controller, Get, Module, Req } from '@nestjs/common';
-import type { Request } from 'node:http';
 import { FarmModule } from './modules/farm/farm.module';
+
+type RequestWithHeaders = {
+  headers: Record<string, string | string[] | undefined>;
+};
 
 @Controller('health')
 class HealthController {
@@ -15,9 +18,10 @@ class HealthController {
   }
 
   @Get('tenant-context')
-  getTenantContext(@Req() request: Request) {
+  getTenantContext(@Req() request: RequestWithHeaders) {
+    const tenantHeader = request.headers['x-tenant-id'];
     return {
-      tenantId: request.headers['x-tenant-id'] ?? null,
+      tenantId: Array.isArray(tenantHeader) ? tenantHeader[0] ?? null : tenantHeader ?? null,
       authenticated: false,
     } as const;
   }
