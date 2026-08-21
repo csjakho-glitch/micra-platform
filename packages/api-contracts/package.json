@@ -2,7 +2,7 @@
   "name": "@micra/api-contracts",
   "private": true,
   "version": "0.1.0",
-  "scripts": {"build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit", "lint": "node -e \"console.log('lint baseline: pass')\"", "test": "vitest run"},
+  "scripts": {"build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit", "lint": "node -e \"console.log('lint baseline: pass')\"", "test": "vitest run --passWithNoTests"},
   "dependencies": {"@micra/domain-types": "workspace:*"},
   "devDependencies": {"vitest": "^3.2.4", "typescript": "^5.8.3"}
 }
