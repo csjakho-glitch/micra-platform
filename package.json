@@ -1,0 +1,12 @@
+{
+  "name": "micra-platform",
+  "private": true,
+  "version": "0.0.0-bootstrap",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "lint": "echo 'lint: implementation pending'",
+    "typecheck": "echo 'typecheck: implementation pending'",
+    "test": "echo 'test: implementation pending'",
+    "build": "echo 'build: implementation pending'"
+  }
+}
