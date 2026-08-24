@@ -1,21 +1,11 @@
 export default function HomePage() {
   return (
-    <main style={{ fontFamily: 'system-ui', maxWidth: 960, margin: '0 auto', padding: 32 }}>
+    <main style={{ fontFamily: 'system-ui', maxWidth: 720, margin: '0 auto', padding: 32 }}>
       <p>MICRA Platform OS</p>
-      <h1>Farm Operations Portal</h1>
+      <h1>Web Application Boundary — Deferred</h1>
       <p>
-        Canonical Web build target for R1 Farm Digital Core. Domain state is owned by the MICRA API;
-        this surface is presentation-only.
+        Web feature implementation is intentionally deferred until CI PASS and R0 runtime/G-ENV gates are verified.
       </p>
-      <section>
-        <h2>Baseline modules</h2>
-        <ul>
-          <li>Farm registry</li>
-          <li>Pond registry</li>
-          <li>Baseline assessment</li>
-          <li>Evidence and audit context</li>
-        </ul>
-      </section>
     </main>
   );
 }
