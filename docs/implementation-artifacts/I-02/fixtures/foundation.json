@@ -1,0 +1,6 @@
+{
+  "tenant_a": {"id": "TENANT-A"},
+  "tenant_b": {"id": "TENANT-B"},
+  "admin": {"id": "USER-A", "tenant_id": "TENANT-A", "roles": ["admin"]},
+  "viewer": {"id": "USER-B", "tenant_id": "TENANT-A", "roles": ["viewer"]}
+}

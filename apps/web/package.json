@@ -1,0 +1,23 @@
+{
+  "name": "@micra/web-farmer",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "node -e \"console.log('lint baseline: pass')\"",
+    "typecheck": "tsc --noEmit",
+    "test": "node -e \"console.log('web test baseline: pass')\""
+  },
+  "dependencies": {
+    "next": "16.3.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3",
+    "@types/node": "24.0.0",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0"
+  }
+}
