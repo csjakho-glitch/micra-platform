@@ -27,8 +27,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build workspace
-        run: pnpm build
+      - name: Build workspace dependencies in canonical order
+        run: |
+          pnpm --filter @micra/domain-types build
+          pnpm --filter @micra/api-contracts build
+          pnpm --filter @micra/api build
+          pnpm --filter @micra/database generate
+          pnpm --filter @micra/web build
 
       - name: Typecheck
         run: pnpm typecheck
@@ -38,3 +43,6 @@ jobs:
 
       - name: Prisma schema generation
         run: pnpm --filter @micra/database generate
+
+      - name: Build verification
+        run: pnpm build
