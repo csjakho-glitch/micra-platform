@@ -1,0 +1,28 @@
+name: MICRA CI
+
+on:
+  push:
+    branches: [main, 'feat/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  r0-build:
+    runs-on: ubuntu-latest
+    env:
+      CI: 'true'
+      NEXT_PUBLIC_SUPABASE_URL: https://fenextlufbesfclptjui.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_CI_PLACEHOLDER
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
