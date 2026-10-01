@@ -51,11 +51,8 @@ f.onsubmit=async e=>{e.preventDefault();if(!f.reportValidity())return;const {dat
 out('Menyimpan survey ke Supabase...');
 const {data:survey,error}=await sb.from('survey_records').insert({evidence_id:evidenceId,farm_id:o.farm_id,cluster_id:o.cluster_id,observer_id:user.id,survey_timestamp:o.survey_at,latitude:o.gps?.lat??null,longitude:o.gps?.lon??null,gps_accuracy_m:o.gps?.accuracy_m??null,payload:o,status:o.status||'raw',confidence:o.confidence}).select('id,evidence_id').single();
 if(error)return out('Database error: '+error.message,'err');
-const evidence={};for(const [k,v] of Object.entries(o)){if(['farm_id','cluster_id','observer','survey_at','gps','confidence','status','notes'].includes(k)||k.startsWith('c')||k.startsWith('e')||k.startsWith('k'))continue;evidence[k]=v;}
-const rows=[{survey_id:survey.id,evidence_id:evidenceId+'-OBS',evidence_type:'observation',domain:'CSE',parameter:'survey_payload',value:evidence,confidence:o.confidence,status:o.status||'raw',observer_id:user.id}];
-const {error:ee}=await sb.from('evidence_records').insert(rows);if(ee)return out('Survey tersimpan, tetapi evidence gagal: '+ee.message,'err');
 const files=[...document.querySelector('#photos').files];for(const file of files){const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const path=`${user.id}/${o.cluster_id||'cluster'}/${evidenceId}/${safe}`;const {error:ue}=await sb.storage.from('survey-photos').upload(path,file,{upsert:false,contentType:file.type});if(ue)return out('Survey tersimpan, tetapi foto gagal diupload: '+ue.message,'err');}
-out(`Saved to Supabase: ${evidenceId} (${files.length} photo)`,'ok');localStorage.removeItem('micra_cse');};
+out(`Saved to Supabase: ${evidenceId}. Evidence is synchronized by the canonical database trigger. (${files.length} photo)`,'ok');localStorage.removeItem('micra_cse');};
 document.querySelector('#ts').textContent=new Date().toLocaleString();refreshSession();
 </script>
 </body></html>
