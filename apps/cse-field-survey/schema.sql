@@ -1,11 +1,25 @@
-create extension if not exists pgcrypto;
-create table if not exists public.cse_surveys (
- id uuid primary key default gen_random_uuid(), evidence_id text unique not null, farm_id text not null, cluster_id text not null,
- observer text not null, survey_at timestamptz not null, gps_lat double precision, gps_lon double precision, gps_accuracy_m double precision,
- payload jsonb not null, status text not null default 'RAW' check(status in ('RAW','VALIDATED','VERIFIED','BASELINE','GEF_EVIDENCE')),
- confidence text, created_at timestamptz not null default now(), verified_at timestamptz, baseline_at timestamptz, gef_evidence_at timestamptz
-);
-alter table public.cse_surveys enable row level security;
--- Development bootstrap only. Replace with authenticated, least-privilege policies before production.
-create policy "cse insert bootstrap" on public.cse_surveys for insert to anon with check(true);
-create policy "cse select bootstrap" on public.cse_surveys for select to anon using(true);
+-- MICRA CSE schema reconciliation
+-- STATUS: LEGACY / NON-CANONICAL. DO NOT EXECUTE.
+--
+-- The live MICRA Supabase database is the canonical schema for CSE/WP-01.
+-- Canonical survey table: public.survey_records
+-- Canonical evidence table: public.evidence_records
+-- Canonical verification: public.verification_records
+-- Canonical baseline: public.baseline_records
+-- Canonical GEF evidence: public.gef_evidence_records
+--
+-- The historical public.cse_surveys bootstrap schema below is intentionally
+-- retired. It used uppercase statuses and anonymous allow-all RLS policies.
+-- It MUST NOT be recreated or used by the application.
+--
+-- Live migration history:
+-- 20260829054644  micra_cse_field_survey_v1_1
+-- 20260904082811  r0_runtime_foundation_security
+-- 20260904084318  phase2_wp01_evidence_workflow
+--
+-- Important reconciliation note:
+-- survey_records is the sole CSE write path. The live database contains
+-- micra_sync_survey_evidence(), which synchronizes evidence_records.
+-- The repository frontend therefore must not insert evidence_records directly.
+--
+-- No Supabase DDL is performed by this repository reconciliation patch.
