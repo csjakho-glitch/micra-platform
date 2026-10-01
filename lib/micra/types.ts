@@ -35,7 +35,7 @@ export type SurveyRecord = {
   gps_accuracy_m: number | null;
   payload: Record<string, unknown>;
   status: RecordStatus;
-  confidence: string;
+  confidence: 'E0' | 'E1' | 'E2' | 'E3' | 'E4';
   verification_notes: string | null;
   verified_by: string | null;
   verified_at: string | null;
